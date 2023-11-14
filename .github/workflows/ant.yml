@@ -92,4 +92,4 @@ jobs:
 
       - name: Cat-ing ant area
         if: always()
-        run: sudo cat /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt >& aadt-check.txt
+        run: sudo cat /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt
