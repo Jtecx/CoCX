@@ -36,8 +36,8 @@ jobs:
         with:
           submodules: true
 
-      #- name: Download and install Android SDK
-      #  uses: android-actions/setup-android@v3
+      - name: Download and install Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
