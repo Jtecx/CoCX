@@ -89,3 +89,9 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
         continue-on-error: true
+
+      - name: Cat-ing ant area
+        uses: actions/upload-artifact@v3
+        with:
+          name: aadt-check
+          run sudo cat /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt
