@@ -45,7 +45,7 @@ jobs:
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
       - name: Install desktop, ant and aapt.
-        run: sudo apt install tightvncserver xfce4 ant ant-optional aapt -y
+        run: sudo apt install tightvncserver xfce4 ant ant-optional -y
 
       # start a VNC session, this will be the desktop for tests
       - name: Start VNC
