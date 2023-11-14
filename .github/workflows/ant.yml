@@ -36,9 +36,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Download and install Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
@@ -47,7 +44,7 @@ jobs:
           accept-air-license: true
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
-      - name: Install desktop
+      - name: Install desktop, ant and aapt.
         run: sudo apt install tightvncserver xfce4 ant ant-optional aapt -y
 
       # start a VNC session, this will be the desktop for tests
@@ -89,10 +86,3 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
         continue-on-error: true
-
-      - name: Cat-ing ant area
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: aapt-bin
-          path: /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt
