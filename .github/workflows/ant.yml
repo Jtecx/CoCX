@@ -91,9 +91,5 @@ jobs:
         continue-on-error: true
 
       - name: Cat-ing ant area
-        uses: actions/upload-artifact@v3
         if: always()
-        with:
-          name: aadt-check
-          run: sudo cat /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt >& aadt-check.txt
-          path: $PWD/aadt-check.txt
+        run: sudo cat /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt >& aadt-check.txt
