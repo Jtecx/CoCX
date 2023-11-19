@@ -48,14 +48,14 @@ jobs:
             /usr/local/bin/ApacheFlexSDK
         id: "cacheme"
 
-          #handle cache failed
-          - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
-            name: Install Flex SDK
-            uses: joshtynjala/setup-apache-flex-action@v2
-            with:
-              flex-version: "4.16.1"
-              air-version: "33.1.1.935"
-              accept-air-license: true
+      #handle cache failed
+      - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
+        name: Install Flex SDK
+        uses: joshtynjala/setup-apache-flex-action@v2
+        with:
+          flex-version: "4.16.1"
+          air-version: "33.1.1.935"
+          accept-air-license: true
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
       - name: Install desktop, ant and aapt.
