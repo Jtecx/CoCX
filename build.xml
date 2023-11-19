@@ -61,7 +61,7 @@
         <attribute name="platform" />
         <attribute name="specialArch"/>
         <sequential>
-            <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true" output="${build.dir}/moarlogs.txt">
+            <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true">
                 <arg line="-package" />
                 <arg line="-target apk-captive-runtime" />
                 <arg line="-arch @{specialArch}"/>

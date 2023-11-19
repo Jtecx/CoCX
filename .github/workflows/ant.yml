@@ -47,6 +47,7 @@ jobs:
           path: |
             /usr/local/bin/ApacheFlexSDK
         id: "cacheme"
+        continue-on-error: true
 
       #handle cache failed
       - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
