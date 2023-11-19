@@ -26,7 +26,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Set up JDK
@@ -60,7 +60,7 @@ jobs:
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
       - name: Install desktop, ant and aapt.
-        run: sudo apt update && sudo apt install tightvncserver xfce4 ant ant-optional -y
+        run: sudo apt install tightvncserver xfce4 ant ant-optional -y
 
       # start a VNC session, this will be the desktop for tests
       - name: Start VNC
@@ -100,4 +100,20 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        continue-on-error: true
+
+      - name: Checking directory
+        if: always()
+        uses: actions/upload-artifact@v3
+          name: infodump-fulldir.txt
+          path: target/infodump-fulldir.txt
+        run: ls -R /usr/local/bin/ApacheFlexSDK &> infodump-fulldir.txt
+        continue-on-error: true
+
+      - name: Checking directory 2
+        if: always()
+        uses: actions/upload-artifact@v3
+          name: infodump-grepdir.txt
+          path: target/infodump-grepdir.txt
+        run: ls -R /usr/local/bin/ApacheFlexSDK | grep apt &> infodump-grepdir.txt
         continue-on-error: true
