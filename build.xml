@@ -78,7 +78,7 @@
     </macrodef>
 
     <macrodef name="createAirApkLinux">
-        <attribute name="platform" />
+<!--        <attribute name="platform" />-->
         <attribute name="specialArch"/>
         <sequential>
             <exec executable="${FLEX_HOME}/lib/android/bin/aapt" failonerror="true">
@@ -103,8 +103,8 @@
     </target>
 
     <target name="airApkLin" description="Create the AIR package" depends="airMobile,checkos" if="isLinux">
-        <createAirApkLinux platform="" specialArch="armv7"/>
-        <createAirApkLinux platform="" specialArch="armv8"/>
+        <createAirApkLinux specialArch="armv7"/>
+        <createAirApkLinux specialArch="armv8"/>
     </target>
 
 
