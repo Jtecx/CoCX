@@ -103,7 +103,9 @@ jobs:
         continue-on-error: true
 
       - name: Running dirchecks for flex stuff
+        if: always()
         run: ls -R /usr/local/bin/ApacheFlexSDK > /home/runner/work/CoCX/CoCX/infodump-fulldir.txt && ls -R /usr/local/bin/ApacheFlexSDK | grep apt > /home/runner/work/CoCX/CoCX/infodump-grepdir.txt
+        continue-on-error: true
 
       - name: Checking directory
         if: always()
