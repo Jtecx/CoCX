@@ -20,7 +20,7 @@ on:
 
 env:
   # tell the build file where to find the flex SDK
-  FLEX_HOME: "build-dep/bin/flex/"
+  FLEX_HOME: "/usr/local/bin/ApacheFlexSDK"
   # this is to trick the flash player into thinking it is running on a desktop
   DISPLAY: ":1"
 
