@@ -77,14 +77,34 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="createAirApkLinux">
+        <attribute name="platform" />
+        <attribute name="specialArch"/>
+        <sequential>
+            <exec executable="${FLEX_HOME}/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt" failonerror="true">
+                <arg line="-package" />
+                <arg line="-target apk-captive-runtime" />
+                <arg line="-arch @{specialArch}"/>
+                <arg line="-storetype pkcs12" />
+                <arg line="-keystore ${basedir}/coc.keystore" />
+                <arg line="-storepass 123456" />
+                <arg line="${build.dir}/CoC-Mobile-@{specialArch}.apk" />
+                <arg line="${basedir}/CoC-Android.xml" />
+                <arg line="-C ${build.dir} CoC-Mobile.swf" />
+                <arg line="-C ${basedir}" />
+                <arg line="devTools/icons" />
+            </exec>
+        </sequential>
+    </macrodef>
+
     <target name="airApkWin" description="Create the AIR package" depends="airMobile,checkos" if="isWindows">
         <createAirApk platform=".bat" specialArch="armv7"/>
         <createAirApk platform=".bat" specialArch="armv8"/>
     </target>
 
     <target name="airApkLin" description="Create the AIR package" depends="airMobile,checkos" if="isLinux">
-        <createAirApk platform="" specialArch="armv7"/>
-        <createAirApk platform="" specialArch="armv8"/>
+        <createAirApkLinux platform="" specialArch="armv7"/>
+        <createAirApkLinux platform="" specialArch="armv8"/>
     </target>
 
 
