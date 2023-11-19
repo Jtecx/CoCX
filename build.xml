@@ -81,7 +81,7 @@
         <attribute name="platform" />
         <attribute name="specialArch"/>
         <sequential>
-            <exec executable="${FLEX_HOME}/apache-flex-sdk-4.16.1-bin/lib/android/bin/aapt" failonerror="true">
+            <exec executable="${FLEX_HOME}/lib/android/bin/aapt" failonerror="true">
                 <arg line="-package" />
                 <arg line="-target apk-captive-runtime" />
                 <arg line="-arch @{specialArch}"/>
