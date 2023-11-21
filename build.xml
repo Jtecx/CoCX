@@ -78,10 +78,9 @@
     </macrodef>
 
     <macrodef name="createAirApkLinux">
-<!--        <attribute name="platform" />-->
         <attribute name="specialArch"/>
         <sequential>
-            <exec executable="${FLEX_HOME}/lib/android/bin/aapt" failonerror="true">
+            <exec executable="${FLEX_HOME}/bin/adt" failonerror="true">
                 <arg line="-package" />
                 <arg line="-target apk-captive-runtime" />
                 <arg line="-arch @{specialArch}"/>
