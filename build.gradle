@@ -1,4 +1,6 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+}
 
 group = "com.fenoxo.cocx"
 version = "1.0.0"
@@ -8,22 +10,20 @@ def FLEX_HOME = project.findProperty("env.FLEX_HOME") ?: System.getenv("FLEX_HOM
 def mainSrcDir = file("${projectDir}/classes")
 def libDir = file("${projectDir}/lib/bin")
 def buildDir = file("${projectDir}/target")
-def reportDir = file("${buildDir}/report")
 
 // Setup Flex and FlexUnit tasks
-ant.taskdef(resource: "flexTasks.tasks", classpath: "${FLEX_HOME}/ant/lib/flexTasks.jar")
-
+dependencies {
+    implementation files("${FLEX_HOME}/lib/flex-compiler-oem.jar")
+}
 // Define tasks
 init {
     doLast {
         delete buildDir
         mkdir buildDir
-        mkdir reportDir
-        $PWD
     }
 }
 
-task buildGameBinary(dependsOn: 'init', type: JavaExec) {
+task buildGameBinary(type: JavaExec, dependsOn: 'init') {
     def debugFlag = project.hasProperty('debugFlag') ? project.debugFlag : 'false'
     def releaseFlag = project.hasProperty('releaseFlag') ? project.releaseFlag : 'false'
     def airFlag = project.hasProperty('airFlag') ? project.airFlag : 'false'
@@ -31,7 +31,7 @@ task buildGameBinary(dependsOn: 'init', type: JavaExec) {
     def binaryName = project.hasProperty('binaryName') ? project.binaryName : 'output.swf'
 
     main = 'flex2.tools.Compiler'
-    classpath = files("${FLEX_HOME}/lib/flex-compiler-oem.jar")
+    classpath = configurations.implementation
     args(
             "${mainSrcDir}/classes/CoC.as",
             '-output', "${buildDir}/${binaryName}",
@@ -53,21 +53,23 @@ task buildGameBinary(dependsOn: 'init', type: JavaExec) {
 
 
 // Define createAirApk closure
-def createAirApk = { specialArch ->
-    exec {
-        executable = "${FLEX_HOME}/bin/adt"
-        args(
-                '-package',
-                '-target', 'apk-captive-runtime',
-                '-arch', specialArch,
-                '-storetype', 'pkcs12',
-                '-keystore', "${projectDir}/coc.keystore",
-                '-storepass', '123456',
-                "${buildDir}/CoC-Mobile-${specialArch}.apk",
-                "${projectDir}/CoC-Android.xml",
-                '-C', buildDir, 'CoC-Mobile.swf',
-                '-C', projectDir, 'devTools/icons'
-        )
+task createAirApk(specialArch) {
+    doLast {
+        exec {
+            executable = "${FLEX_HOME}/bin/adt"
+            args(
+                    '-package',
+                    '-target', 'apk-captive-runtime',
+                    '-arch', specialArch,
+                    '-storetype', 'pkcs12',
+                    '-keystore', "${projectDir}/coc.keystore",
+                    '-storepass', '123456',
+                    "${buildDir}/CoC-Mobile-${specialArch}.apk",
+                    "${projectDir}/CoC-Android.xml",
+                    '-C', buildDir, 'CoC-Mobile.swf',
+                    '-C', projectDir, 'devTools/icons'
+            )
+        }
     }
 }
 
