@@ -53,7 +53,7 @@ task buildGameBinary(type: JavaExec, dependsOn: 'init') {
 
 
 // Define createAirApk closure
-task createAirApk(specialArch) {
+def createAirApk(specialArch) {
     doLast {
         exec {
             executable = "${FLEX_HOME}/bin/adt"
