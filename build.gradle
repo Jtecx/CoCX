@@ -22,13 +22,6 @@ init {
     }
 }
 
-task checkos {
-    doLast {
-        project.ext.isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-        project.ext.isLinux = Os.isFamily(Os.FAMILY_UNIX)
-    }
-}
-
 task buildGameBinary(dependsOn: 'init', type: JavaExec) {
     def debugFlag = project.hasProperty('debugFlag') ? project.debugFlag : 'false'
     def releaseFlag = project.hasProperty('releaseFlag') ? project.releaseFlag : 'false'
@@ -77,7 +70,7 @@ def createAirApk = { specialArch ->
     }
 }
 
-task airApkLin(dependsOn: ['airMobile', 'checkos']) {
+task airApkLin(dependsOn: ['airMobile']) {
     createAirApk('armv7')
     createAirApk('armv8')
 }

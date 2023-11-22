@@ -57,26 +57,31 @@ jobs:
           air-version: "33.1.1.575"
           accept-air-license: true
 
-      # install VNC and xfce4, so we have a desktop, as the flash player requires one:
-      - name: Install desktop, ant and aapt.
-#        run: sudo apt update && sudo apt install tightvncserver xfce4 ant ant-optional -y
-        run: sudo apt update && sudo apt install tightvncserver xfce4 -y
+#      # install VNC and xfce4, so we have a desktop, as the flash player requires one:
+#      - name: Install desktop, ant and aapt.
+##        run: sudo apt update && sudo apt install tightvncserver xfce4 ant ant-optional -y
+#        run: sudo apt update && sudo apt install tightvncserver xfce4 -y
 
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      # start a VNC session, this will be the desktop for tests
-      - name: Start VNC
-        run: Xvnc :1 &
+#      # start a VNC session, this will be the desktop for tests
+#      - name: Start VNC
+#        run: Xvnc :1 &
+
+      # this is where the build happens. A separate build is started for every entry in the matrix element
+      - name: Check what is going on in target
+        #        run: ant -v allCI
+        run: ls -lahr /home/runner/work/CoCX/CoCX/
 
       - name: Make ADT executable, where's aapt?
         run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt && gradle wrapper
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
-      - name: Build
+      - name: Check what is going on in target
 #        run: ant -v allCI
-        run: ./gradlew build -d
+        run: ls -lahr /home/runner/work/CoCX/CoCX/
 
 #      - name: Build-armv7
 #        run: cd /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/ && ./adt -package -target apk-captive-runtime -arch armv7 -storetype pkcs12 -keystore /home/runner/work/CoCX/CoCX/coc.keystore -storepass 123456 /home/runner/work/CoCX/CoCX/target/CoC-Mobile-armv7.apk /home/runner/work/CoCX/CoCX/CoC-Android.xml -C  /home/runner/work/CoCX/CoCX/target CoC-Mobile.swf -C /home/runner/work/CoCX/CoCX devTools/icons
