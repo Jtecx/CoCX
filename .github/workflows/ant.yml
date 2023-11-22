@@ -86,7 +86,7 @@ jobs:
         continue-on-error: true
 
       - name: Build
-        run: ./gradlew build
+        run: ./gradlew allCI
 
 
 #      - name: Build-armv7
