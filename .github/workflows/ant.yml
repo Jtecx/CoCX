@@ -71,7 +71,7 @@ jobs:
         run: Xvnc :1 &
 
       - name: Make ADT executable, where's aapt?
-        run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt && gradle wrapper
+        run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
       - name: Build
