@@ -54,12 +54,12 @@ jobs:
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
-          air-version: "33.1.1.575"
+          air-version: "33.1.1.935" #575
           accept-air-license: true
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
       - name: Install desktop, ant and aapt.
-        run: sudo apt update && sudo apt install tightvncserver xfce4 ant ant-optional aapt -y
+        run: sudo apt update && sudo apt install tightvncserver xfce4 ant ant-optional -y
 
       # start a VNC session, this will be the desktop for tests
       - name: Start VNC
