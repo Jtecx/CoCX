@@ -79,7 +79,7 @@ public var loader:URLLoader;
 
 public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
-public var savedGameDir:String = "data/com.fenoxo.coc";
+public var savedGameDir:String = "data/com.fenoxo.cocx";
 
 public var notes:String = "";
 
