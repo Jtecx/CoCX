@@ -25,11 +25,11 @@ init {
 
 tasks.create(name: 'buildGameBinary', dependsOn: 'init') {
     doLast {
-        def debugFlag = project.hasProperty('debugFlag') ? project.debugFlag : 'false'
-        def releaseFlag = project.hasProperty('releaseFlag') ? project.releaseFlag : 'false'
-        def airFlag = project.hasProperty('airFlag') ? project.airFlag : 'false'
-        def standaloneFlag = project.hasProperty('standaloneFlag') ? project.standaloneFlag : 'false'
-        def binaryName = project.hasProperty('binaryName') ? project.binaryName : 'output.swf'
+        project.debugFlag = project.hasProperty('debugFlag') ? project.debugFlag : 'false'
+        project.releaseFlag = project.hasProperty('releaseFlag') ? project.releaseFlag : 'false'
+        project.airFlag = project.hasProperty('airFlag') ? project.airFlag : 'false'
+        project.standaloneFlag = project.hasProperty('standaloneFlag') ? project.standaloneFlag : 'false'
+        project.binaryName = project.hasProperty('binaryName') ? project.binaryName : 'output.swf'
 
         javaexec {
             main = 'flex2.tools.Compiler'
