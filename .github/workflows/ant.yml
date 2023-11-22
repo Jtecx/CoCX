@@ -86,7 +86,7 @@ jobs:
         continue-on-error: true
 
       - name: Build
-        run: ./gradlew allCI
+        run: ./gradlew allCI --stacktrace
 
 
 #      - name: Build-armv7
@@ -97,27 +97,35 @@ jobs:
 
       - name: Save Debug SWF
         uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: debug-swf
           path: target/CoC-debug.swf
+        continue-on-error: true
 
       - name: Save Release SWF
         uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: release-swf
           path: target/CoC-release.swf
+        continue-on-error: true
 
       - name: Save Android armv7 APK
         uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: mobile-arm7-32bit-apk
           path: target/CoC-Mobile-armv7.apk
+        continue-on-error: true
 
       - name: Save Android armv8 APK
         uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: mobile-arm8-64bit-apk
           path: target/CoC-Mobile-armv8.apk
+        continue-on-error: true
 
       # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
       - name: Discord notification to channel
