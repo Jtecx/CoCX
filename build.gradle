@@ -59,9 +59,9 @@ task buildGameBinary(dependsOn: 'init', type: JavaExec) {
 
 
 // Define createAirApk closure
-def createAirApk = { platform, specialArch ->
+def createAirApk = { specialArch ->
     exec {
-        executable = "${FLEX_HOME}/bin/adt${platform}"
+        executable = "${FLEX_HOME}/bin/adt"
         args(
                 '-package',
                 '-target', 'apk-captive-runtime',
@@ -77,14 +77,9 @@ def createAirApk = { platform, specialArch ->
     }
 }
 
-task airApkWin(dependsOn: ['airMobile', 'checkos']) {
-    createAirApk('.bat', 'armv7')
-    createAirApk('.bat', 'armv8')
-}
-
 task airApkLin(dependsOn: ['airMobile', 'checkos']) {
-    createAirApk('', 'armv7')
-    createAirApk('', 'armv8')
+    createAirApk('armv7')
+    createAirApk('armv8')
 }
 
 task release(dependsOn: 'init') {
@@ -115,7 +110,7 @@ task all(dependsOn: ['init', 'release', 'debug', 'airMobile']) {
     description = 'Build all swf versions'
 }
 
-task makeMobileAir(dependsOn: ['init', 'airMobile', 'airApkLin', 'airApkWin']) {
+task makeMobileAir(dependsOn: ['init', 'airMobile', 'airApkLin']) {
     description = 'Build mobile App'
 }
 
