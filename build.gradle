@@ -19,6 +19,7 @@ init {
         delete buildDir
         mkdir buildDir
         mkdir reportDir
+        $PWD
     }
 }
 
