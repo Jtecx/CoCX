@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 group = "com.fenoxo.cocx"
@@ -16,100 +16,116 @@ dependencies {
     implementation files("${FLEX_HOME}/lib/flex-compiler-oem.jar")
 }
 // Define tasks
-init {
+tasks.create(name: 'init') {
     doLast {
         delete buildDir
         mkdir buildDir
     }
 }
 
-task buildGameBinary(type: JavaExec, dependsOn: 'init') {
-    def debugFlag = project.hasProperty('debugFlag') ? project.debugFlag : 'false'
-    def releaseFlag = project.hasProperty('releaseFlag') ? project.releaseFlag : 'false'
-    def airFlag = project.hasProperty('airFlag') ? project.airFlag : 'false'
-    def standaloneFlag = project.hasProperty('standaloneFlag') ? project.standaloneFlag : 'false'
-    def binaryName = project.hasProperty('binaryName') ? project.binaryName : 'output.swf'
-
-    main = 'flex2.tools.Compiler'
-    classpath = configurations.implementation
-    args(
-            "${mainSrcDir}/classes/CoC.as",
-            '-output', "${buildDir}/${binaryName}",
-            '-static-rsls', 'true',
-            '-load-config', "${FLEX_HOME}/frameworks/flex-config.xml",
-            '-source-path', "${FLEX_HOME}/frameworks",
-            '-source-path', "${mainSrcDir}",
-            '-compiler.debug', debugFlag,
-            '-library-path', "${FLEX_HOME}/frameworks/libs/*.swc",
-            '-library-path', "${FLEX_HOME}/frameworks/libs/air/*.swc",
-            '-library-path', "${libDir}/*.swc",
-            '-define', "CONFIG::release,${releaseFlag}",
-            '-define', "CONFIG::debug,${debugFlag}",
-            '-define', "CONFIG::AIR,${airFlag}",
-            '-define', "CONFIG::STANDALONE,${standaloneFlag}",
-            '-swf-version', '41'
-    )
-}
-
-
-// Define createAirApk closure
-def createAirApk(specialArch) {
+tasks.create(name: 'buildGameBinary', dependsOn: 'init') {
     doLast {
-        exec {
-            executable = "${FLEX_HOME}/bin/adt"
+        def debugFlag = project.hasProperty('debugFlag') ? project.debugFlag : 'false'
+        def releaseFlag = project.hasProperty('releaseFlag') ? project.releaseFlag : 'false'
+        def airFlag = project.hasProperty('airFlag') ? project.airFlag : 'false'
+        def standaloneFlag = project.hasProperty('standaloneFlag') ? project.standaloneFlag : 'false'
+        def binaryName = project.hasProperty('binaryName') ? project.binaryName : 'output.swf'
+
+        javaexec {
+            main = 'flex2.tools.Compiler'
+            classpath = configurations.implementation
             args(
-                    '-package',
-                    '-target', 'apk-captive-runtime',
-                    '-arch', specialArch,
-                    '-storetype', 'pkcs12',
-                    '-keystore', "${projectDir}/coc.keystore",
-                    '-storepass', '123456',
-                    "${buildDir}/CoC-Mobile-${specialArch}.apk",
-                    "${projectDir}/CoC-Android.xml",
-                    '-C', buildDir, 'CoC-Mobile.swf',
-                    '-C', projectDir, 'devTools/icons'
+                    "${mainSrcDir}/classes/CoC.as",
+                    '-output', "${buildDir}/${binaryName}",
+                    '-static-rsls', 'true',
+                    '-load-config', "${FLEX_HOME}/frameworks/flex-config.xml",
+                    '-source-path', "${FLEX_HOME}/frameworks",
+                    '-source-path', "${mainSrcDir}",
+                    '-compiler.debug', debugFlag,
+                    '-library-path', "${FLEX_HOME}/frameworks/libs/*.swc",
+                    '-library-path', "${FLEX_HOME}/frameworks/libs/air/*.swc",
+                    '-library-path', "${libDir}/*.swc",
+                    '-define', "CONFIG::release,${releaseFlag}",
+                    '-define', "CONFIG::debug,${debugFlag}",
+                    '-define', "CONFIG::AIR,${airFlag}",
+                    '-define', "CONFIG::STANDALONE,${standaloneFlag}",
+                    '-swf-version', '41'
             )
         }
     }
 }
 
-task airApkLin(dependsOn: ['airMobile']) {
+
+// Define createAirApk closure
+def createAirApk(specialArch) {
+    tasks.create(name: "createAirApk${specialArch}", dependsOn: 'airMobile') {
+        doLast {
+            exec {
+                executable = "${FLEX_HOME}/bin/adt"
+                args(
+                        '-package',
+                        '-target', 'apk-captive-runtime',
+                        '-arch', specialArch,
+                        '-storetype', 'pkcs12',
+                        '-keystore', "${projectDir}/coc.keystore",
+                        '-storepass', '123456',
+                        "${buildDir}/CoC-Mobile-${specialArch}.apk",
+                        "${projectDir}/CoC-Android.xml",
+                        '-C', buildDir, 'CoC-Mobile.swf',
+                        '-C', projectDir, 'devTools/icons'
+                )
+            }
+        }
+    }
+}
+
+tasks.create(name: 'airApkLin') {
+    dependsOn 'airMobile'
     createAirApk('armv7')
     createAirApk('armv8')
 }
 
-task release(dependsOn: 'init') {
-    buildGameBinary.debugFlag = 'false'
-    buildGameBinary.releaseFlag = 'true'
-    buildGameBinary.airFlag = 'false'
-    buildGameBinary.standaloneFlag = 'true'
-    buildGameBinary.binaryName = 'CoC-release.swf'
+tasks.create(name: 'release', dependsOn: 'init') {
+    doLast {
+        tasks.buildGameBinary.debugFlag = 'false'
+        tasks.buildGameBinary.releaseFlag = 'true'
+        tasks.buildGameBinary.airFlag = 'false'
+        tasks.buildGameBinary.standaloneFlag = 'true'
+        tasks.buildGameBinary.binaryName = 'CoC-release.swf'
+    }
 }
 
-task debug(dependsOn: 'init') {
-    buildGameBinary.debugFlag = 'true'
-    buildGameBinary.releaseFlag = 'false'
-    buildGameBinary.airFlag = 'false'
-    buildGameBinary.standaloneFlag = 'true'
-    buildGameBinary.binaryName = 'CoC-debug.swf'
+tasks.create(name: 'debug', dependsOn: 'init') {
+    doLast {
+        tasks.buildGameBinary.debugFlag = 'true'
+        tasks.buildGameBinary.releaseFlag = 'false'
+        tasks.buildGameBinary.airFlag = 'false'
+        tasks.buildGameBinary.standaloneFlag = 'true'
+        tasks.buildGameBinary.binaryName = 'CoC-debug.swf'
+    }
 }
 
-task airMobile(dependsOn: 'init') {
-    buildGameBinary.debugFlag = 'true'
-    buildGameBinary.releaseFlag = 'true'
-    buildGameBinary.airFlag = 'true'
-    buildGameBinary.standaloneFlag = 'false'
-    buildGameBinary.binaryName = 'CoC-Mobile.swf'
+tasks.create(name: 'airMobile', dependsOn: 'init') {
+    doLast {
+        tasks.buildGameBinary.debugFlag = 'true'
+        tasks.buildGameBinary.releaseFlag = 'true'
+        tasks.buildGameBinary.airFlag = 'true'
+        tasks.buildGameBinary.standaloneFlag = 'false'
+        tasks.buildGameBinary.binaryName = 'CoC-Mobile.swf'
+    }
 }
 
-task all(dependsOn: ['init', 'release', 'debug', 'airMobile']) {
+tasks.create(name: 'all') {
+    dependsOn 'init', 'release', 'debug', 'airMobile'
     description = 'Build all swf versions'
 }
 
-task makeMobileAir(dependsOn: ['init', 'airMobile', 'airApkLin']) {
+tasks.create(name: 'allCI') {
+    dependsOn 'init', 'release', 'debug', 'makeMobileAir'
+    description = 'Build all swf versions'
+}
+
+tasks.create(name: 'makeMobileAir') {
+    dependsOn 'init', 'airMobile', 'airApkLin'
     description = 'Build mobile App'
-}
-
-task allCI(dependsOn: ['init', 'release', 'debug', 'makeMobileAir']) {
-    description = 'Build all swf versions'
 }
