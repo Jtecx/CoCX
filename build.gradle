@@ -16,7 +16,7 @@ dependencies {
     implementation files("${FLEX_HOME}/lib/flex-compiler-oem.jar")
 }
 // Define tasks
-tasks.create(name: 'init') {
+init {
     doLast {
         delete buildDir
         mkdir buildDir
