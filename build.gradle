@@ -13,7 +13,7 @@ def testFile = file("${buildDir}/CoC-test.swf")
 ant.taskdef(resource: "flexTasks.tasks", classpath: "${FLEX_HOME}/ant/lib/flexTasks.jar")
 
 // Define tasks
-task init {
+init {
     doLast {
         delete buildDir
         mkdir buildDir
@@ -56,38 +56,34 @@ task buildGameBinary(dependsOn: 'init', type: JavaExec) {
     )
 }
 
-task createAirApk(platform, specialArch) {
-    doLast {
-        exec {
-            executable = "${FLEX_HOME}/bin/adt${platform}"
-            args(
-                    '-package',
-                    '-target', 'apk-captive-runtime',
-                    '-arch', specialArch,
-                    '-storetype', 'pkcs12',
-                    '-keystore', "${projectDir}/coc.keystore",
-                    '-storepass', '123456',
-                    "${buildDir}/CoC-Mobile-${specialArch}.apk",
-                    "${projectDir}/CoC-Android.xml",
-                    '-C', buildDir, 'CoC-Mobile.swf',
-                    '-C', projectDir, 'devTools/icons'
-            )
-        }
+
+// Define createAirApk closure
+def createAirApk = { platform, specialArch ->
+    exec {
+        executable = "${FLEX_HOME}/bin/adt${platform}"
+        args(
+                '-package',
+                '-target', 'apk-captive-runtime',
+                '-arch', specialArch,
+                '-storetype', 'pkcs12',
+                '-keystore', "${projectDir}/coc.keystore",
+                '-storepass', '123456',
+                "${buildDir}/CoC-Mobile-${specialArch}.apk",
+                "${projectDir}/CoC-Android.xml",
+                '-C', buildDir, 'CoC-Mobile.swf',
+                '-C', projectDir, 'devTools/icons'
+        )
     }
 }
 
 task airApkWin(dependsOn: ['airMobile', 'checkos']) {
-    doLast {
-        createAirApk '.bat', 'armv7'
-        createAirApk '.bat', 'armv8'
-    }
+    createAirApk('.bat', 'armv7')
+    createAirApk('.bat', 'armv8')
 }
 
 task airApkLin(dependsOn: ['airMobile', 'checkos']) {
-    doLast {
-        createAirApk '.bat', 'armv7'
-        createAirApk '.bat', 'armv8'
-    }
+    createAirApk('', 'armv7')
+    createAirApk('', 'armv8')
 }
 
 task release(dependsOn: 'init') {
