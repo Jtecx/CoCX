@@ -66,7 +66,7 @@ jobs:
         run: Xvnc :1 &
 
       - name: Make ADT executable, where's aapt?
-        run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt && ls -lahr /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/lib/
+        run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt && ls -lahr /usr/lib/android-sdk/build-tools/debian/  | grep aapt
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
       - name: Build
