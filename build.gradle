@@ -1,13 +1,14 @@
 apply plugin: 'java'
 
+group = "com.fenoxo.cocx"
+version = "1.0.0"
+
 // Define properties
 def FLEX_HOME = project.findProperty("env.FLEX_HOME") ?: System.getenv("FLEX_HOME")
 def mainSrcDir = file("${projectDir}/classes")
-def testSrcDir = file("${projectDir}/test")
 def libDir = file("${projectDir}/lib/bin")
 def buildDir = file("${projectDir}/target")
 def reportDir = file("${buildDir}/report")
-def testFile = file("${buildDir}/CoC-test.swf")
 
 // Setup Flex and FlexUnit tasks
 ant.taskdef(resource: "flexTasks.tasks", classpath: "${FLEX_HOME}/ant/lib/flexTasks.jar")
