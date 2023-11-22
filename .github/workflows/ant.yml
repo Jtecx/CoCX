@@ -76,7 +76,7 @@ jobs:
         run: ls -lahr /home/runner/work/CoCX/CoCX/
 
       - name: Make ADT executable, where's aapt?
-        run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt && gradle wrapper --stacktrace
+        run: chmod +x /usr/local/bin/ApacheFlexSDK/apache-flex-sdk-4.16.1-bin/bin/adt # gradle wrapper --stacktrace &&
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
       - name: Check what is going on in target
