@@ -12,6 +12,8 @@ on:
   push:
     paths:
       - 'classes/classes/CoC.as'
+    tags:
+      - 'v0\.8[A-Za-z]\.[A-Za-z0-9]+'
   #Manual trigger run. Only works once this is in the main branch.
   workflow_dispatch:
   #Scheduled run. Only works once this is in the main branch.
