@@ -29,6 +29,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
+      - name: Discord notification to channel
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        continue-on-error: true
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -125,14 +133,6 @@ jobs:
         with:
           name: mobile-arm8-64bit-apk
           path: target/CoC-Mobile-armv8.apk
-        continue-on-error: true
-
-      # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
-      - name: Discord notification to channel
-        uses: sarisia/actions-status-discord@v1
-        if: always()
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
         continue-on-error: true
 
 #      - name: Running dirchecks for flex stuff
