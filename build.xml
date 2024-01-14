@@ -63,13 +63,13 @@
                 <arg line="-storetype pkcs12" />
                 <arg line="-keystore '${basedir}'/coc.keystore" />
                 <arg line="-storepass 123456" />
+                <arg line="-use-network=false" />
+                <arg line="-keep-as3-metadata Embed" />
                 <arg line="'${build.dir}'/CoC-Mobile-@{special-postfix}.apk" />
                 <arg line="'${basedir}'/CoC-Android-@{swf-name-postfix}.xml" />
                 <arg line="-C '${build.dir}' CoC-Mobile-@{swf-name-postfix}.swf" />
                 <arg line="-C '${basedir}'" />
                 <arg line="devTools/icons" />
-                <arg line="-use-network=false" />
-                <arg line="-keep-as3-metadata Embed" />
             </exec>
         </sequential>
     </macrodef>
