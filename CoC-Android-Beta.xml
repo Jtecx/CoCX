@@ -18,20 +18,8 @@
   </icon>
   <android>
     <manifestAdditions>&lt;manifest android:installLocation=&quot;auto&quot;&gt;
-                <!--&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
-                &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.DISABLE_KEYGUARD&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;--&gt; -->
-
                 &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;
-                &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; android:maxSdkVersion=&quot;28&quot;/&gt;
+                &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
                 &lt;uses-permission android:name=&quot;android.permission.MANAGE_EXTERNAL_STORAGE&quot;/&gt;
       
                 &lt;!--&lt;uses-feature android:required=&quot;true&quot; android:name=&quot;android.hardware.touchscreen.multitouch&quot;/&gt;--&gt;
