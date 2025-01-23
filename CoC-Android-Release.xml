@@ -22,7 +22,10 @@
                 &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;
                 &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
                 &lt;uses-permission android:name=&quot;android.permission.MANAGE_EXTERNAL_STORAGE&quot;/&gt;
-
+                &lt;uses-sdk android:minSdkVersion=&quot;21&quot;
+                &lt;uses-sdk android:compileSdkVersion=&quot;31&quot;
+                &lt;uses-sdk android:targetSdkVersion=&quot;31&quot;
+      
                 &lt;!--&lt;uses-feature android:required=&quot;true&quot; android:name=&quot;android.hardware.touchscreen.multitouch&quot;/&gt;--&gt;
                 &lt;!--&lt;application android:enabled=&quot;true&quot;&gt;
                     &lt;activity android:excludeFromRecents=&quot;false&quot;&gt;
