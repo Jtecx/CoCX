@@ -17,6 +17,7 @@
     <image512x512>devTools/icons/icon_512.png</image512x512>
   </icon>
   <android>
+    <requestLegacyExternalStorage>true</requestLegacyExternalStorage>
     <manifestAdditions>&lt;manifest android:installLocation=&quot;auto&quot;&gt;
                 &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;
                 &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
