@@ -1,5 +1,4 @@
-<application xmlns="http://ns.adobe.com/air/application/51.1"
-  android:requestLegacyExternalStorage="true">
+<application xmlns="http://ns.adobe.com/air/application/51.1">
   <id>classes.CoC</id>
   <filename>Corruption of Champion X</filename>
   <name>Corruption of Champion X</name>
