@@ -18,7 +18,7 @@
   </icon>
   <android>
     <manifestAdditions>&lt;manifest android:installLocation=&quot;auto&quot;&gt;
-                &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+                <!--&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
                 &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;/&gt;--&gt;
@@ -28,7 +28,11 @@
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;--&gt; -->
+
+                <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+                <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
                 &lt;!--&lt;uses-feature android:required=&quot;true&quot; android:name=&quot;android.hardware.touchscreen.multitouch&quot;/&gt;--&gt;
                 &lt;!--&lt;application android:enabled=&quot;true&quot;&gt;
