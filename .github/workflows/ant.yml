@@ -51,8 +51,8 @@ jobs:
         #id: "cacheme"
 
         #handle cache failed
-      - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
-        name: Install Flex SDK
+      #- if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
+      - name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
