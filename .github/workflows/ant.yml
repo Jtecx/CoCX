@@ -42,17 +42,17 @@ jobs:
         with:
           submodules: true
 
-      #- name: Cache FlexSDK Install
-        #uses: actions/cache@v3
-        #with:
-          #key: apache-stuff
-          #path: |
-            #C:/ApacheFlexSDK
-        #id: "cacheme"
+      - name: Cache FlexSDK Install
+        uses: actions/cache@v3
+        with:
+          key: apache-stuff
+          path: |
+            C:/ApacheFlexSDK
+        id: "cacheme"
 
         #handle cache failed
-      #- if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
-      - name: Install Flex SDK
+      - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
+        name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
