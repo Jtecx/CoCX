@@ -3,7 +3,6 @@
   <filename>Corruption of Champion X</filename>
   <name>Corruption of Champion X</name>
   <versionNumber>0.0.0</versionNumber>
-  <compileSDKVersion>31</compileSDKVersion>
   <initialWindow>
     <content>CoC-Mobile-Release.swf</content>
     <visible>true</visible>
