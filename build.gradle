@@ -1,0 +1,38 @@
+plugins {
+    id 'base'
+}
+
+ext {
+    airSdkPath = '${env.FLEX_HOME}' // Replace with the path to your AIR SDK
+    appId = 'classes.CoC'
+    appVersion = '1.0'
+    appDescriptor = 'CoC-Android-Beta.xml'
+    swfFile = 'target/CoC-debug.swf'
+    apkOutputv7 = 'build/outputs/CoC-Mobile-Beta-32Bit.apk'
+    apkOutputv8 = 'build/outputs/CoC-Mobile-Beta-64Bit.apk'
+}
+
+task createApkarmv7(type: Exec) {
+    description = 'Package the SWF into an APK'
+    group = 'build'
+
+    inputs.files(file(swfFile), file(appDescriptor))
+    outputs.file(file(apkOutput))
+
+    doFirst {
+        mkdir 'build/outputs'
+    }
+
+    commandLine "$airSdkPath/bin/adt", "-package", "-target", "apk-captive-runtime",
+            "-arch armv7"
+            "-storetype", "pkcs12",
+            "-keystore", "${basedir}'/coc.keystore", // Debug certificate for development
+            "-storepass", "123456", // Default password for the debug cert
+            apkOutputv7, appDescriptor, swfFile
+}
+
+task clean(type: Delete) {
+    delete 'build'
+}
+
+defaultTasks 'createApkarmv7'
