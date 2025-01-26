@@ -24,7 +24,7 @@ task createApkarmv7(type: Exec) {
     }
 
     commandLine "$airSdkPath/bin/adt", "-package", "-target", "apk-captive-runtime",
-            "-arch armv7"
+            "-arch armv7",
             "-storetype", "pkcs12",
             "-keystore", "${basedir}'/coc.keystore", // Debug certificate for development
             "-storepass", "123456", // Default password for the debug cert
