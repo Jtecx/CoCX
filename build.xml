@@ -44,7 +44,7 @@
                 <define name="CONFIG::debug" value="@{debug-flag}"/>
                 <define name="CONFIG::AIR" value="@{air-flag}"/>
                 <define name="CONFIG::STANDALONE" value="@{standalone-flag}"/>
-                <swf-version>41</swf-version>
+                <swf-version>51</swf-version>
                 <use-network>false</use-network>
             </mxmlc>
         </sequential>
@@ -131,4 +131,5 @@
     <target name="all" depends="init,release,debug,CoCMobileBeta,CoCMobileRelease" description="Build all swf versions"/>
     <target name="makeMobileAir" depends="init,ApkDebug,ApkRelease" description=" build mobile App"/>
     <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
+    <target name="swfOnly" depends="init,release,debug" description="Build all swf versions"/>
 </project>

@@ -42,13 +42,17 @@ jobs:
         with:
           submodules: true
 
-      - name: Cache FlexSDK Install
-        uses: actions/cache@v3
-        with:
-          key: apache-stuff2
-          path: |
-            C:/ApacheFlexSDK
-        id: "cacheme"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+#      - name: Cache FlexSDK Install
+#        uses: actions/cache@v3
+#        with:
+#          key: apache-stuff2
+#          path: |
+#            C:/ApacheFlexSDK
+#        id: "cacheme"
 
         #handle cache failed
       - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
@@ -62,43 +66,53 @@ jobs:
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
       - name: Build
-        run: ant allCI
+        run: ant swfOnly
 
       - name: Save Debug SWF
         uses: actions/upload-artifact@v4
         with:
-          name: debug-swf
+          name: CoC-debug.swf
           path: target/CoC-debug.swf
 
       - name: Save Release SWF
         uses: actions/upload-artifact@v4
         with:
-          name: release-swf
+          name: CoC-release.swf
           path: target/CoC-release.swf
+
+      - name: Build with Gradle
+        run: gradle createApkarmv7
 
       - name: Save Android armv7 Beta APK
         uses: actions/upload-artifact@v4
         with:
-          name: CoC-Mobile-Beta-32bit
-          path: target/CoC-Mobile-Beta-32bit.apk
+           name: CoC-Mobile-Beta-32bit.apk
+           path: build/outputs/CoC-Mobile-Beta-32Bit.apk
 
-      - name: Save Android armv8 Beta APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: CoC-Mobile-Beta-64bit
-          path: target/CoC-Mobile-Beta-64bit.apk
 
-      - name: Save Android armv7 Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: CoC-Mobile-Release-32bit
-          path: target/CoC-Mobile-Release-32bit.apk
-
-      - name: Save Android armv8 Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: CoC-Mobile-Release-64bit
-          path: target/CoC-Mobile-Release-64bit.apk
+#      - name: Save Android armv7 Beta APK
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: CoC-Mobile-Beta-32bit
+#          path: target/CoC-Mobile-Beta-32bit.apk
+#
+#      - name: Save Android armv8 Beta APK
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: CoC-Mobile-Beta-64bit
+#          path: target/CoC-Mobile-Beta-64bit.apk
+#
+#      - name: Save Android armv7 Release APK
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: CoC-Mobile-Release-32bit
+#          path: target/CoC-Mobile-Release-32bit.apk
+#
+#      - name: Save Android armv8 Release APK
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: CoC-Mobile-Release-64bit
+#          path: target/CoC-Mobile-Release-64bit.apk
 
       # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
       - name: Discord notification to channel

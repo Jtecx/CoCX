@@ -16,21 +16,31 @@
     <image144x144>devTools/icons/icon_144.png</image144x144>
     <image512x512>devTools/icons/icon_512.png</image512x512>
   </icon>
-  <android>
-    <manifestAdditions>&lt;manifest android:installLocation=&quot;auto&quot;&gt;
-                &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;
-                &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
-                &lt;uses-permission android:name=&quot;android.permission.MANAGE_EXTERNAL_STORAGE&quot;/&gt;
-      
-                &lt;!--&lt;uses-feature android:required=&quot;true&quot; android:name=&quot;android.hardware.touchscreen.multitouch&quot;/&gt;--&gt;
-                &lt;!--&lt;application android:enabled=&quot;true&quot;&gt;
-                    &lt;activity android:excludeFromRecents=&quot;false&quot;&gt;
-                        &lt;intent-filter&gt;
-                            &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
-                            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
-                        &lt;/intent-filter&gt;
-                    &lt;/activity&gt;
-                &lt;/application&gt;--&gt;
-            &lt;/manifest&gt;</manifestAdditions>
-  </android>
+    <android>
+        <manifestAdditions>
+            <![CDATA[
+        <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+            <!-- Basic Permissions -->
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="30"/>
+
+            <!-- Advanced Permissions for Android 11+ -->
+            <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+
+            <!-- Request permission to query the environment -->
+            <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" android:required="false"/>
+            <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" android:required="false"/>
+            <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" android:required="false"/>
+
+            <!-- Metadata for MANAGE_EXTERNAL_STORAGE -->
+            <application>
+                <meta-data
+                    android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+                    android:required="true" />
+            </application>
+        </manifest>
+        ]]>
+        </manifestAdditions>
+    </android>
+
 </application>
