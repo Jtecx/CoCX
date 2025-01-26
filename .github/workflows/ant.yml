@@ -114,6 +114,21 @@ jobs:
           name: CoC-Mobile-Release-64bit
           path: target/CoC-Mobile-Release-64bit.apk
 
+      - name: MD5 checksum
+        shell: bash
+        run: |
+          set -e
+          echo "original_md5=$(md5sum target/CoC-Mobile-Beta-32bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+          echo "original_md5=$(md5sum target/CoC-Mobile-Beta-64bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+          echo "original_md5=$(md5sum target/CoC-Mobile-Release-32bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+          echo "original_md5=$(md5sum target/CoC-Mobile-Release-64bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+
+      - name: Save APK MD5 checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: APK MD5 checksum
+          path: target/MD5.txt
+
       # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
       - name: Discord notification to channel
         uses: sarisia/actions-status-discord@v1

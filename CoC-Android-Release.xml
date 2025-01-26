@@ -21,11 +21,11 @@
             <![CDATA[
         <manifest xmlns:tools="http://schemas.android.com/tools" >
             <!-- Basic Permissions -->
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
-            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="30"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="30"/>
+            <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="30"/> -->
 
             <!-- Advanced Permissions for Android 11+ -->
-            <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+            <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" android:minSdkVersion="31"/>
 
             <!-- Metadata for MANAGE_EXTERNAL_STORAGE -->
             <application>
