@@ -1,4 +1,4 @@
-<application xmlns="http://ns.adobe.com/air/application/51.1">
+<application xmlns="http://ns.adobe.com/air/application/33.1">
   <id>classes.CoC</id>
   <filename>Corruption of Champion X</filename>
   <name>Corruption of Champion X</name>
@@ -16,23 +16,23 @@
     <image144x144>devTools/icons/icon_144.png</image144x144>
     <image512x512>devTools/icons/icon_512.png</image512x512>
   </icon>
-    <android>
-        <manifestAdditions>
-            <![CDATA[
-        <manifest xmlns:tools="http://schemas.android.com/tools" android:installLocation="auto">
-            <!-- Basic Permissions -->
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="30"/>
-            <!-- Advanced Permissions for Android 11+ -->
-            <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"/>
+  <android>
+    <manifestAdditions>
+        <![CDATA[
+    <manifest android:installLocation="auto">
+        <!-- Basic Permissions -->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="30"/>
+        <!-- Advanced Permissions for Android 11+ -->
+        <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 
-            <!-- Metadata for MANAGE_EXTERNAL_STORAGE -->
-            <application>
-                <meta-data
-                    android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-                    android:required="true" />
-            </application>
-        </manifest>
-        ]]>
-        </manifestAdditions>
-    </android>
+        <!-- Metadata for MANAGE_EXTERNAL_STORAGE -->
+        <application>
+            <meta-data
+                android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+                android:required="true" />
+        </application>
+    </manifest>
+    ]]>
+    </manifestAdditions>
+  </android>
 </application>
