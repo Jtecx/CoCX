@@ -17,7 +17,7 @@ task createApkarmv7(type: Exec) {
     group = 'build'
 
     inputs.files(file(swfFile), file(appDescriptor))
-    outputs.file(file(apkOutput))
+    outputs.file(file(apkOutputv7))
 
     doFirst {
         mkdir 'build/outputs'

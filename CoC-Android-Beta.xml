@@ -27,11 +27,6 @@
             <!-- Advanced Permissions for Android 11+ -->
             <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
 
-            <!-- Request permission to query the environment -->
-            <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" android:required="false"/>
-            <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" android:required="false"/>
-            <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" android:required="false"/>
-
             <!-- Metadata for MANAGE_EXTERNAL_STORAGE -->
             <application>
                 <meta-data
