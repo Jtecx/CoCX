@@ -5,11 +5,11 @@
     <property name="FLEX_HOME" location="${env.FLEX_HOME}"/>
 
     <property name="main.src.dir" value="${basedir}/classes"/>
-    <property name="test.src.dir" value="${basedir}/test"/>
+    <!-- <property name="test.src.dir" value="${basedir}/test"/> -->
     <property name="lib.dir" value="${basedir}/lib/bin"/>
     <property name="build.dir" value="${basedir}/target"/>
-    <property name="report.dir" value="${build.dir}/report"/>
-    <property name="test.file" value="${build.dir}/CoC-test.swf"/>
+    <!-- <property name="report.dir" value="${build.dir}/report"/> -->
+    <!-- <property name="test.file" value="${build.dir}/CoC-test.swf"/> -->
 
     <!-- Setup Flex and FlexUnit ant tasks -->
     <!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
@@ -19,7 +19,7 @@
     <target name="init">
         <delete dir="${build.dir}"/>
         <mkdir dir="${build.dir}"/>
-        <mkdir dir="${report.dir}"/>
+        <!-- <mkdir dir="${report.dir}"/> -->
     </target>
 
     <macrodef name="build-game-binary">
