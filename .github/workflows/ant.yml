@@ -46,13 +46,13 @@ jobs:
 #      - name: Setup Gradle
 #        uses: gradle/actions/setup-gradle@v4
 
-#      - name: Cache FlexSDK Install
-#        uses: actions/cache@v3
-#        with:
-#          key: apache-stuff2
-#          path: |
-#            C:/ApacheFlexSDK
-#        id: "cacheme"
+      - name: Cache FlexSDK Install
+        uses: actions/cache@v3
+        with:
+          key: apache-stuff2
+          path: |
+            C:/ApacheFlexSDK
+        id: "cacheme"
 
         #handle cache failed
       - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
