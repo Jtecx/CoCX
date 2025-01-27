@@ -112,11 +112,11 @@
 
     <echo>building standalone swfs</echo>
     <target name="release" depends="init" description="Build with release flags">
-        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"/>
+        <build-game-binary debug-flag="false" release-flag="true" air-flag="true" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"/>
     </target>
 
     <target name="debug" depends="init" description="Build with debug flags">
-        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"/>
+        <build-game-binary debug-flag="true" release-flag="false" air-flag="true" standalone-flag="true" should-optimize="true" binary-name="CoC-debug.swf"/>
     </target>
 
     <echo> building mobile/air swfs</echo>
