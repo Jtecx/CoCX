@@ -42,17 +42,13 @@ jobs:
         with:
           submodules: true
 
-#
-#      - name: Setup Gradle
-#        uses: gradle/actions/setup-gradle@v4
-
-      - name: Cache FlexSDK Install
-        uses: actions/cache@v3
-        with:
-          key: apache-stuff2
-          path: |
-            C:/ApacheFlexSDK
-        id: "cacheme"
+#      - name: Cache FlexSDK Install
+#        uses: actions/cache@v3
+#        with:
+#          key: apache-stuff2
+#          path: |
+#            C:/ApacheFlexSDK
+#        id: "cacheme"
 
         #handle cache failed
       - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
@@ -60,7 +56,6 @@ jobs:
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
-          #air-version: "51.1.3.6"
           air-version: "33.1.1.345"
           accept-air-license: true
 
@@ -79,16 +74,6 @@ jobs:
         with:
           name: CoC-release.swf
           path: target/CoC-release.swf
-
-#      - name: Build with Gradle
-#        run: gradle createApkarmv7
-#
-#      - name: Save Android armv7 Beta APK
-#        uses: actions/upload-artifact@v4
-#        with:
-#           name: CoC-Mobile-Beta-32bit.apk
-#           path: build/outputs/CoC-Mobile-Beta-32Bit.apk
-
 
       - name: Save Android armv7 Beta APK
         uses: actions/upload-artifact@v4
@@ -114,20 +99,20 @@ jobs:
           name: CoC-Mobile-Release-64bit
           path: target/CoC-Mobile-Release-64bit.apk
 
-      - name: MD5 checksum
-        shell: bash
-        run: |
-          set -e
-          echo "CoC-Beta32_md5=$(md5sum target/CoC-Mobile-Beta-32bit.apk | awk '{ print $1 }')" >> target/MD5.txt
-          echo "CoC-Beta64_md5=$(md5sum target/CoC-Mobile-Beta-64bit.apk | awk '{ print $1 }')" >> target/MD5.txt
-          echo "CoC-Release32_md5=$(md5sum target/CoC-Mobile-Release-32bit.apk | awk '{ print $1 }')" >> target/MD5.txt
-          echo "CoC-Release64_md5=$(md5sum target/CoC-Mobile-Release-64bit.apk | awk '{ print $1 }')" >> target/MD5.txt
-
-      - name: Save APK MD5 checksum
-        uses: actions/upload-artifact@v4
-        with:
-          name: APK MD5 checksum
-          path: target/MD5.txt
+#      - name: MD5 checksum
+#        shell: bash
+#        run: |
+#          set -e
+#          echo "CoC-Beta32_md5=$(md5sum target/CoC-Mobile-Beta-32bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+#          echo "CoC-Beta64_md5=$(md5sum target/CoC-Mobile-Beta-64bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+#          echo "CoC-Release32_md5=$(md5sum target/CoC-Mobile-Release-32bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+#          echo "CoC-Release64_md5=$(md5sum target/CoC-Mobile-Release-64bit.apk | awk '{ print $1 }')" >> target/MD5.txt
+#
+#      - name: Save APK MD5 checksum
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: APK MD5 checksum
+#          path: target/MD5.txt
 
       # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
       - name: Discord notification to channel
