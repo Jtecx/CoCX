@@ -18,6 +18,14 @@
   </icon>
   <android>
     <manifestAdditions>
+			        <![CDATA[
+    <manifest android:installLocation="auto">
+        <!-- Basic Permissions -->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <!-- Advanced Permissions for Android 11+ -->
+        <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    </manifest>
+    ]]>
     </manifestAdditions>
   </android>
 </application>
