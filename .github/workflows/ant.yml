@@ -122,6 +122,14 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
         continue-on-error: true
 
+      - uses: actions/checkout@master
+      - name: Upload Release 64Bit test
+        uses: sinshutu/upload-to-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: target/CoC-Mobile-Release-64bit.apk
+
 #      - name: Release step
 #        uses: softprops/action-gh-release@v1
 #        if: startsWith(github.ref, 'refs/tags/')
